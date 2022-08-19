@@ -68,6 +68,9 @@ import { MusteriTalepEkleComponent } from './musteri/musteri-talep/musteri-talep
 import { MusteriTalepDuzenleComponent } from './musteri/musteri-talep/musteri-talep-duzenle/musteri-talep-duzenle.component';
 import { YoneticiDeveloperProjeComponent } from './yonetici/yonetici-developer-proje/yonetici-developer-proje.component';
 import { YoneticiGorevEkleComponent } from './yonetici/yonetici-gorev-ekle/yonetici-gorev-ekle.component';
+import { DurumComponent } from './durum/durum.component';
+import { ProjeDurumEkleComponent } from './durum/proje-durum-ekle/proje-durum-ekle.component';
+import { GorevDurumEkleComponent } from './durum/gorev-durum-ekle/gorev-durum-ekle.component';
 
  
 
@@ -138,6 +141,9 @@ import { YoneticiGorevEkleComponent } from './yonetici/yonetici-gorev-ekle/yonet
       MusteriTalepDuzenleComponent,
       YoneticiDeveloperProjeComponent,
       YoneticiGorevEkleComponent,
+      DurumComponent,
+      ProjeDurumEkleComponent,
+      GorevDurumEkleComponent,
 
   ],
   imports: [

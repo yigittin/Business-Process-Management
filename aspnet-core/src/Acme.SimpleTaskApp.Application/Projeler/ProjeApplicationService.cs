@@ -5,6 +5,7 @@ using Acme.SimpleTaskApp.Authorization;
 using Acme.SimpleTaskApp.Projeler;
 using Acme.SimpleTaskApp.Projeler.Developers.DevelopersDto;
 using Acme.SimpleTaskApp.Projeler.Projeler.ProjelerDtos;
+using Acme.SimpleTaskApp.Projeler.ProjelerDtos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,14 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
         private readonly IRepository<Proje> _repository;
         private readonly IRepository<Musteri> _musteriRepository;
         private readonly IRepository<Developer> _developerRepository;
-        public ProjeAppService(IRepository<Proje> repository,IRepository<Musteri> musteri,IRepository<Developer> developerRepository
+        private readonly IRepository<ProjeDurum> _projedurumrepo;
+        public ProjeAppService(IRepository<Proje> repository,IRepository<Musteri> musteri,IRepository<Developer> developerRepository,IRepository<ProjeDurum> projedurum
             )
         {
             _repository = repository;
             _musteriRepository = musteri;
             _developerRepository = developerRepository;
+            _projedurumrepo = projedurum;
         }
 
 
@@ -213,7 +216,29 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
             entity.ProjeYoneticisiId = null;
         }
 
+        public async Task<List<ProjeDurumDto>> GetProjeDurumuList()
+        {
+            var entity = await _projedurumrepo.GetAll().Skip(0).Take(10).ToListAsync();
+            return entity.Select(e => new ProjeDurumDto
+            {
+                ProjeDurumId = e.Id,
+                ProjeDurumu = e.ProjeDurumu,
+            }
+            ).ToList();
+        }
+        public async Task ProjeDurumuEkle(ProjeDurumDto input)
+        {
+            var entity = new ProjeDurum
+            {
+                ProjeDurumu = input.ProjeDurumu,
+            };
+            await _projedurumrepo.InsertAsync(entity);
+        }
 
+        public async Task DeleteProjeDurum(int id)
+        {
+            await _projedurumrepo.DeleteAsync(id);
+        }
         public async Task DeleteProje(int id)
         {
             await _repository.DeleteAsync(id);

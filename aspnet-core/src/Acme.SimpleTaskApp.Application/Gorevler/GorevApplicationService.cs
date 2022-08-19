@@ -2,6 +2,7 @@
 using Abp.Domain.Repositories;
 using Abp.UI;
 using Acme.SimpleTaskApp.Authorization;
+using Acme.SimpleTaskApp.Gorevler.GorevlerDtos;
 using Acme.SimpleTaskApp.Projeler.Gorevler.GorevlerDtos;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,11 +18,13 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
     {
         private readonly IRepository<Gorev> _repository;
         private readonly IRepository<Proje> _proje;
-      
-        public GorevAppService(IRepository<Gorev> repository, IRepository<Proje> proje)
+        private readonly IRepository<GorevDurum> _gorevdurum;
+
+        public GorevAppService(IRepository<Gorev> repository, IRepository<Proje> proje, IRepository<GorevDurum> gorevdurum)
         {
             _repository = repository;
             _proje = proje;
+            _gorevdurum = gorevdurum;
         }
 
 
@@ -245,6 +248,29 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
             input.DeveloperId = entity.Id;
             await _repository.UpdateAsync(entity);
 
+        }
+
+        public async Task<List<GorevDurumDto>> GetGorevDurumuList()
+        {
+            var entity = await _gorevdurum.GetAll().Skip(0).Take(10).ToListAsync();
+            return entity.Select(e => new GorevDurumDto
+            {
+                GorevDurumId = e.Id,
+                GorevDurumu = e.GorevDurumu,
+            }
+            ).ToList();
+        }
+        public async Task GorevDurumuEkle(GorevDurumDto input)
+        {
+            var entity = new GorevDurum
+            {
+                GorevDurumu = input.GorevDurumu,
+            };
+            await _gorevdurum.InsertAsync(entity);
+        }
+        public async Task DeleteGorevDurum(int id)
+        {
+            await _gorevdurum.DeleteAsync(id);
         }
 
         public async Task DeleteGorev(int id)
