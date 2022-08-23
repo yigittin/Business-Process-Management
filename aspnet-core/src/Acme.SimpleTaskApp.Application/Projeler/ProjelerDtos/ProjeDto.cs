@@ -20,6 +20,8 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler.ProjelerDtos
         public List<Developer> Developers { get; set; }
         public DurumEnum Durum { get; set; }
 
+        public bool IsDone { get; set; }
+
 
 
     }

@@ -142,6 +142,76 @@ export class AccountServiceProxy {
 }
 
 @Injectable()
+export class AdminDashboardServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    getAdminDashboard(): Observable<ProjeDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/AdminDashboard/GetAdminDashboard";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAdminDashboard(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAdminDashboard(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ProjeDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ProjeDto[]>;
+        }));
+    }
+
+    protected processGetAdminDashboard(response: HttpResponseBase): Observable<ProjeDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(ProjeDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ProjeDto[]>(null as any);
+    }
+}
+
+@Injectable()
 export class ConfigurationServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -5344,6 +5414,185 @@ export class YoneticiServiceProxy {
     }
 }
 
+@Injectable()
+export class YoneticiDashboardServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    getYoneticiDashboardId(): Observable<YoneticiDashDto> {
+        let url_ = this.baseUrl + "/api/services/app/YoneticiDashboard/GetYoneticiDashboardId";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetYoneticiDashboardId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetYoneticiDashboardId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<YoneticiDashDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<YoneticiDashDto>;
+        }));
+    }
+
+    protected processGetYoneticiDashboardId(response: HttpResponseBase): Observable<YoneticiDashDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = YoneticiDashDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<YoneticiDashDto>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getYoneticiDashboardProjeler(): Observable<ProjeDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/YoneticiDashboard/GetYoneticiDashboardProjeler";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetYoneticiDashboardProjeler(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetYoneticiDashboardProjeler(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ProjeDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ProjeDto[]>;
+        }));
+    }
+
+    protected processGetYoneticiDashboardProjeler(response: HttpResponseBase): Observable<ProjeDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(ProjeDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ProjeDto[]>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getYoneticiDashboardGorevler(): Observable<GorevDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/YoneticiDashboard/GetYoneticiDashboardGorevler";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetYoneticiDashboardGorevler(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetYoneticiDashboardGorevler(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GorevDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GorevDto[]>;
+        }));
+    }
+
+    protected processGetYoneticiDashboardGorevler(response: HttpResponseBase): Observable<GorevDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(GorevDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GorevDto[]>(null as any);
+    }
+}
+
 export class ApplicationInfoDto implements IApplicationInfoDto {
     version: string | undefined;
     releaseDate: moment.Moment;
@@ -7623,6 +7872,7 @@ export class Proje implements IProje {
     musteri: Musteri;
     projeYoneticisi: ProjeYonetici;
     projeYoneticisiId: number | undefined;
+    isDone: boolean;
 
     constructor(data?: IProje) {
         if (data) {
@@ -7653,6 +7903,7 @@ export class Proje implements IProje {
             this.musteri = _data["musteri"] ? Musteri.fromJS(_data["musteri"]) : <any>undefined;
             this.projeYoneticisi = _data["projeYoneticisi"] ? ProjeYonetici.fromJS(_data["projeYoneticisi"]) : <any>undefined;
             this.projeYoneticisiId = _data["projeYoneticisiId"];
+            this.isDone = _data["isDone"];
         }
     }
 
@@ -7683,6 +7934,7 @@ export class Proje implements IProje {
         data["musteri"] = this.musteri ? this.musteri.toJSON() : <any>undefined;
         data["projeYoneticisi"] = this.projeYoneticisi ? this.projeYoneticisi.toJSON() : <any>undefined;
         data["projeYoneticisiId"] = this.projeYoneticisiId;
+        data["isDone"] = this.isDone;
         return data;
     }
 
@@ -7713,6 +7965,7 @@ export interface IProje {
     musteri: Musteri;
     projeYoneticisi: ProjeYonetici;
     projeYoneticisiId: number | undefined;
+    isDone: boolean;
 }
 
 export class ProjeDto implements IProjeDto {
@@ -7725,6 +7978,7 @@ export class ProjeDto implements IProjeDto {
     musteriAdi: string | undefined;
     developers: Developer[] | undefined;
     durum: DurumEnum;
+    isDone: boolean;
 
     constructor(data?: IProjeDto) {
         if (data) {
@@ -7754,6 +8008,7 @@ export class ProjeDto implements IProjeDto {
                     this.developers.push(Developer.fromJS(item));
             }
             this.durum = _data["durum"];
+            this.isDone = _data["isDone"];
         }
     }
 
@@ -7783,6 +8038,7 @@ export class ProjeDto implements IProjeDto {
                 data["developers"].push(item.toJSON());
         }
         data["durum"] = this.durum;
+        data["isDone"] = this.isDone;
         return data;
     }
 
@@ -7804,6 +8060,7 @@ export interface IProjeDto {
     musteriAdi: string | undefined;
     developers: Developer[] | undefined;
     durum: DurumEnum;
+    isDone: boolean;
 }
 
 export class ProjeEkleDto implements IProjeEkleDto {
@@ -7873,6 +8130,7 @@ export class ProjeGuncelleDto implements IProjeGuncelleDto {
     durum: DurumEnum;
     projeYoneticisi: ProjeYonetici;
     projeYoneticisiId: number;
+    isDone: boolean;
 
     constructor(data?: IProjeGuncelleDto) {
         if (data) {
@@ -7896,6 +8154,7 @@ export class ProjeGuncelleDto implements IProjeGuncelleDto {
             this.durum = _data["durum"];
             this.projeYoneticisi = _data["projeYoneticisi"] ? ProjeYonetici.fromJS(_data["projeYoneticisi"]) : <any>undefined;
             this.projeYoneticisiId = _data["projeYoneticisiId"];
+            this.isDone = _data["isDone"];
         }
     }
 
@@ -7919,6 +8178,7 @@ export class ProjeGuncelleDto implements IProjeGuncelleDto {
         data["durum"] = this.durum;
         data["projeYoneticisi"] = this.projeYoneticisi ? this.projeYoneticisi.toJSON() : <any>undefined;
         data["projeYoneticisiId"] = this.projeYoneticisiId;
+        data["isDone"] = this.isDone;
         return data;
     }
 
@@ -7942,6 +8202,7 @@ export interface IProjeGuncelleDto {
     durum: DurumEnum;
     projeYoneticisi: ProjeYonetici;
     projeYoneticisiId: number;
+    isDone: boolean;
 }
 
 export class ProjeYonetici implements IProjeYonetici {
@@ -9549,6 +9810,49 @@ export interface IUserToken {
     name: string | undefined;
     value: string | undefined;
     expireDate: moment.Moment | undefined;
+}
+
+export class YoneticiDashDto implements IYoneticiDashDto {
+    yoneticiId: number;
+
+    constructor(data?: IYoneticiDashDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.yoneticiId = _data["yoneticiId"];
+        }
+    }
+
+    static fromJS(data: any): YoneticiDashDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new YoneticiDashDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["yoneticiId"] = this.yoneticiId;
+        return data;
+    }
+
+    clone(): YoneticiDashDto {
+        const json = this.toJSON();
+        let result = new YoneticiDashDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IYoneticiDashDto {
+    yoneticiId: number;
 }
 
 export class YoneticiDropDownDto implements IYoneticiDropDownDto {

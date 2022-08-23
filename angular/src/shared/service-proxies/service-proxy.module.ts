@@ -18,6 +18,7 @@ import * as ApiServiceProxies from './service-proxies';
         ApiServiceProxies.GorevServiceProxy,
         ApiServiceProxies.DevelopersServiceProxy,
         ApiServiceProxies.YoneticiServiceProxy,
+        ApiServiceProxies.YoneticiDashboardServiceProxy, 
 
         { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true }
     ]

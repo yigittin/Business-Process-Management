@@ -38,7 +38,7 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
 
                      PS . Yigit
              */
-            var getList = await _repository.GetAll().Include(a=>a.Musteri).ThenInclude(a=>a.User).Skip(0).Take(15).ToListAsync();
+            var getList = await _repository.GetAll().Where(q=>q.IsDone==false).Include(a=>a.Musteri).ThenInclude(a=>a.User).Skip(0).Take(15).ToListAsync();
             var getSingle = getList.FirstOrDefault();
             return getList.Select(e => new ProjeDto
             {

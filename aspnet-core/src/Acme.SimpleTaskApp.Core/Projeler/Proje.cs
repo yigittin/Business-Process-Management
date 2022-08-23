@@ -27,6 +27,8 @@ namespace Acme.SimpleTaskApp.Projeler
         public ProjeYonetici ProjeYoneticisi { get; set; }
         public int? ProjeYoneticisiId { get; set; }
 
+        public bool IsDone { get; set; }
+
     }
 
 }
