@@ -19,6 +19,7 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler.ProjelerDtos
         public string MusteriAdi { get; set; }
         public List<Developer> Developers { get; set; }
         public DurumEnum Durum { get; set; }
+        public string ProjeDurum { get; set; }
 
 
 

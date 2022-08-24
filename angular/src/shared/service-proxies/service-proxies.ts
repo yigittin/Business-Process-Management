@@ -6956,6 +6956,7 @@ export class GorevDto implements IGorevDto {
     gorevId: number;
     gorevTanimi: string | undefined;
     durum: DurumEnum;
+    gorevDurum: string | undefined;
     gorevAciklama: string | undefined;
     developerId: number | undefined;
     developerName: string | undefined;
@@ -6979,6 +6980,7 @@ export class GorevDto implements IGorevDto {
             this.gorevId = _data["gorevId"];
             this.gorevTanimi = _data["gorevTanimi"];
             this.durum = _data["durum"];
+            this.gorevDurum = _data["gorevDurum"];
             this.gorevAciklama = _data["gorevAciklama"];
             this.developerId = _data["developerId"];
             this.developerName = _data["developerName"];
@@ -7002,6 +7004,7 @@ export class GorevDto implements IGorevDto {
         data["gorevId"] = this.gorevId;
         data["gorevTanimi"] = this.gorevTanimi;
         data["durum"] = this.durum;
+        data["gorevDurum"] = this.gorevDurum;
         data["gorevAciklama"] = this.gorevAciklama;
         data["developerId"] = this.developerId;
         data["developerName"] = this.developerName;
@@ -7025,6 +7028,7 @@ export interface IGorevDto {
     gorevId: number;
     gorevTanimi: string | undefined;
     durum: DurumEnum;
+    gorevDurum: string | undefined;
     gorevAciklama: string | undefined;
     developerId: number | undefined;
     developerName: string | undefined;
@@ -7152,6 +7156,7 @@ export class GorevGuncelleDto implements IGorevGuncelleDto {
     developerId: number;
     projeId: number;
     durum: DurumEnum;
+    gorevDurum: string | undefined;
     baslamaZamani: moment.Moment;
 
     constructor(data?: IGorevGuncelleDto) {
@@ -7171,6 +7176,7 @@ export class GorevGuncelleDto implements IGorevGuncelleDto {
             this.developerId = _data["developerId"];
             this.projeId = _data["projeId"];
             this.durum = _data["durum"];
+            this.gorevDurum = _data["gorevDurum"];
             this.baslamaZamani = _data["baslamaZamani"] ? moment(_data["baslamaZamani"].toString()) : <any>undefined;
         }
     }
@@ -7190,6 +7196,7 @@ export class GorevGuncelleDto implements IGorevGuncelleDto {
         data["developerId"] = this.developerId;
         data["projeId"] = this.projeId;
         data["durum"] = this.durum;
+        data["gorevDurum"] = this.gorevDurum;
         data["baslamaZamani"] = this.baslamaZamani ? this.baslamaZamani.toISOString() : <any>undefined;
         return data;
     }
@@ -7209,6 +7216,7 @@ export interface IGorevGuncelleDto {
     developerId: number;
     projeId: number;
     durum: DurumEnum;
+    gorevDurum: string | undefined;
     baslamaZamani: moment.Moment;
 }
 
@@ -7987,6 +7995,7 @@ export class Proje implements IProje {
     projeAdi: string | undefined;
     description: string | undefined;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     baslamaTarihi: moment.Moment;
     bitisTarihi: moment.Moment;
     musteriBitisTarihi: moment.Moment;
@@ -8017,6 +8026,7 @@ export class Proje implements IProje {
             this.projeAdi = _data["projeAdi"];
             this.description = _data["description"];
             this.durum = _data["durum"];
+            this.projeDurum = _data["projeDurum"];
             this.baslamaTarihi = _data["baslamaTarihi"] ? moment(_data["baslamaTarihi"].toString()) : <any>undefined;
             this.bitisTarihi = _data["bitisTarihi"] ? moment(_data["bitisTarihi"].toString()) : <any>undefined;
             this.musteriBitisTarihi = _data["musteriBitisTarihi"] ? moment(_data["musteriBitisTarihi"].toString()) : <any>undefined;
@@ -8047,6 +8057,7 @@ export class Proje implements IProje {
         data["projeAdi"] = this.projeAdi;
         data["description"] = this.description;
         data["durum"] = this.durum;
+        data["projeDurum"] = this.projeDurum;
         data["baslamaTarihi"] = this.baslamaTarihi ? this.baslamaTarihi.toISOString() : <any>undefined;
         data["bitisTarihi"] = this.bitisTarihi ? this.bitisTarihi.toISOString() : <any>undefined;
         data["musteriBitisTarihi"] = this.musteriBitisTarihi ? this.musteriBitisTarihi.toISOString() : <any>undefined;
@@ -8077,6 +8088,7 @@ export interface IProje {
     projeAdi: string | undefined;
     description: string | undefined;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     baslamaTarihi: moment.Moment;
     bitisTarihi: moment.Moment;
     musteriBitisTarihi: moment.Moment;
@@ -8096,6 +8108,7 @@ export class ProjeDto implements IProjeDto {
     musteriAdi: string | undefined;
     developers: Developer[] | undefined;
     durum: DurumEnum;
+    projeDurum: string | undefined;
 
     constructor(data?: IProjeDto) {
         if (data) {
@@ -8125,6 +8138,7 @@ export class ProjeDto implements IProjeDto {
                     this.developers.push(Developer.fromJS(item));
             }
             this.durum = _data["durum"];
+            this.projeDurum = _data["projeDurum"];
         }
     }
 
@@ -8154,6 +8168,7 @@ export class ProjeDto implements IProjeDto {
                 data["developers"].push(item.toJSON());
         }
         data["durum"] = this.durum;
+        data["projeDurum"] = this.projeDurum;
         return data;
     }
 
@@ -8175,6 +8190,7 @@ export interface IProjeDto {
     musteriAdi: string | undefined;
     developers: Developer[] | undefined;
     durum: DurumEnum;
+    projeDurum: string | undefined;
 }
 
 export class ProjeDurumDto implements IProjeDurumDto {
@@ -8289,6 +8305,7 @@ export class ProjeGuncelleDto implements IProjeGuncelleDto {
     musteriBitisTarihi: moment.Moment;
     musteriBaslamaTarihi: moment.Moment;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     projeYoneticisi: ProjeYonetici;
     projeYoneticisiId: number;
 
@@ -8312,6 +8329,7 @@ export class ProjeGuncelleDto implements IProjeGuncelleDto {
             this.musteriBitisTarihi = _data["musteriBitisTarihi"] ? moment(_data["musteriBitisTarihi"].toString()) : <any>undefined;
             this.musteriBaslamaTarihi = _data["musteriBaslamaTarihi"] ? moment(_data["musteriBaslamaTarihi"].toString()) : <any>undefined;
             this.durum = _data["durum"];
+            this.projeDurum = _data["projeDurum"];
             this.projeYoneticisi = _data["projeYoneticisi"] ? ProjeYonetici.fromJS(_data["projeYoneticisi"]) : <any>undefined;
             this.projeYoneticisiId = _data["projeYoneticisiId"];
         }
@@ -8335,6 +8353,7 @@ export class ProjeGuncelleDto implements IProjeGuncelleDto {
         data["musteriBitisTarihi"] = this.musteriBitisTarihi ? this.musteriBitisTarihi.toISOString() : <any>undefined;
         data["musteriBaslamaTarihi"] = this.musteriBaslamaTarihi ? this.musteriBaslamaTarihi.toISOString() : <any>undefined;
         data["durum"] = this.durum;
+        data["projeDurum"] = this.projeDurum;
         data["projeYoneticisi"] = this.projeYoneticisi ? this.projeYoneticisi.toJSON() : <any>undefined;
         data["projeYoneticisiId"] = this.projeYoneticisiId;
         return data;
@@ -8358,6 +8377,7 @@ export interface IProjeGuncelleDto {
     musteriBitisTarihi: moment.Moment;
     musteriBaslamaTarihi: moment.Moment;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     projeYoneticisi: ProjeYonetici;
     projeYoneticisiId: number;
 }

@@ -42,7 +42,8 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 DeveloperId = e.DeveloperId,
                 DeveloperNot=e.DeveloperNot,
-                DeveloperName=e.Developer.DeveloperName,
+                GorevDurum = e.GorevDurum,
+               // DeveloperName=e.Developer.DeveloperName,
             }).ToList();
         }
 
@@ -63,7 +64,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
             gorev.ProjeAdi = entity.Proje.ProjeAdi;
             gorev.BaslamaZamani = entity.BaslamaZamani;
             gorev.Durum = entity.Durum;
-            gorev.DeveloperName = entity.Developer.DeveloperName;
+           // gorev.DeveloperName = entity.Developer.DeveloperName;
             
             gorev.DeveloperNot = entity.DeveloperNot; 
             if (entity.DeveloperId == 0 || entity.DeveloperId == null)
@@ -72,7 +73,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
             }
             else
             {
-                gorev.DeveloperName = entity.Developer.DeveloperName;
+                //gorev.DeveloperName = entity.Developer.DeveloperName;
             }
             
             return gorev;        
@@ -99,7 +100,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 BitirmeZamani = e.BitirmeZamani,
                 DeveloperId = e.DeveloperId,
-                DeveloperName = e.Developer.DeveloperName,
+               // DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot=e.DeveloperNot,
             }).ToList();
 
@@ -118,7 +119,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 BitirmeZamani = e.BitirmeZamani,
                 DeveloperId = e.DeveloperId,
-                DeveloperName = e.Developer.DeveloperName,
+                //DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot = e.DeveloperNot,
             }).ToList();
         }
@@ -137,7 +138,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 BitirmeZamani = e.BitirmeZamani,
                 DeveloperId = e.DeveloperId,
-                DeveloperName = e.Developer.DeveloperName,
+            //    DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot = e.DeveloperNot,
             }).ToList();
 
@@ -157,7 +158,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 BitirmeZamani = e.BitirmeZamani,
                 DeveloperId = e.DeveloperId,
-                DeveloperName = e.Developer.DeveloperName,
+                //DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot = e.DeveloperNot,
             }).ToList();
         }
@@ -193,7 +194,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 throw new UserFriendlyException("Gorev bulunamadı");
             }
 
-            entity.Durum = input.Durum;
+            entity.GorevDurum = input.GorevDurum;
 
             if (input.Durum == DurumEnum.Tamamlandi)
             {
@@ -232,7 +233,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
 
             entity.GorevTanimi = input.GorevTanimi;
             entity.GorevAciklama = input.GorevAciklama;
-            entity.Durum = input.Durum;
+            entity.GorevDurum = input.GorevDurum;
 
         }
 

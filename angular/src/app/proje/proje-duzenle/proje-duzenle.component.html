@@ -23,8 +23,8 @@
                         </label>
                         <div class="col-md-3">
                             <input type="text" class="form-control" name="yoneticiName" id="yoneticiName"
-                                [(ngModel)]="projeGuncelle.projeAdi" #projeAdiModel="ngModel" required
-                                maxlength="32" value="{{projeDetails.projeAdi}}">
+                                [(ngModel)]="projeGuncelle.projeAdi" #projeAdiModel="ngModel" required maxlength="32"
+                                value="{{projeDetails.projeAdi}}">
                         </div>
                     </div>
                     <div class="form-group row justify-content-center required">
@@ -33,8 +33,8 @@
                         </label>
                         <div class="col-md-3">
                             <input type="text" class="form-control" name="aciklama" id="aciklama"
-                                [(ngModel)]="projeGuncelle.description" #projeAdiModel="ngModel" required
-                                maxlength="32" value="{{projeDetails.description}}">
+                                [(ngModel)]="projeGuncelle.description" #projeAdiModel="ngModel" required maxlength="32"
+                                value="{{projeDetails.description}}">
                         </div>
                     </div>
                     <div class="form-group row justify-content-center required">
@@ -42,8 +42,8 @@
                             {{ "Musteri Adı" | localize }}
                         </label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" name="musteriAdi" id="musteriAdi"                                
-                                maxlength="32" value="{{projeDetails.musteriAdi}}" readonly>
+                            <input type="text" class="form-control" name="musteriAdi" id="musteriAdi" maxlength="32"
+                                value="{{projeDetails.musteriAdi}}" readonly>
                         </div>
                     </div>
                     <div class="form-group row justify-content-center required">
@@ -51,17 +51,20 @@
                             {{ "Durum" | localize }}
                         </label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" name="durum" id="durum"                                
-                                maxlength="32" value="{{projeDetails.durum}}" readonly>
+                            <div class="col-md-3">
+                                <ng-select [items]="listDurum |async" [ngModelOptions]="{standalone: true}"
+                                    bindLabel="projeDurumu" autofocus bindValue="projeDurumu"
+                                    [(ngModel)]="projeGuncelle.projeDurum" #userIdModel="ngModel"></ng-select>
+                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group row justify-content-center ">
                         <label class="col-md-3 col-form-label" for="name">
                             {{ "Başlama Tarihi" | localize }}
                         </label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" name="baslamaTarihi" id="baslamaTarihi" 
+                            <input type="text" class="form-control" name="baslamaTarihi" id="baslamaTarihi"
                                 maxlength="32" value="{{projeDetails.baslamaTarihi}}" readonly>
                         </div>
                     </div>
@@ -81,7 +84,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-sm bg-secondary" >
+                                    <button type="button" class="btn btn-sm bg-secondary">
                                         <i class="fas fa-pencil-alt"></i>
                                         {{ "Proje Listele" | localize }}
                                     </button>

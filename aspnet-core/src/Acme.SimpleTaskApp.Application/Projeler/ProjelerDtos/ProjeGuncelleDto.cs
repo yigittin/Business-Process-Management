@@ -17,10 +17,10 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler.ProjelerDtos
         public DateTime MusteriBitisTarihi { get; set; }
         public DateTime MusteriBaslamaTarihi { get; set; }
         public DurumEnum Durum { get; set; }
-
+        public string ProjeDurum { get; set; }
         public ProjeYonetici ProjeYoneticisi { get; set; }
         public int ProjeYoneticisiId { get; set; }
-
+      
 
     }
 }

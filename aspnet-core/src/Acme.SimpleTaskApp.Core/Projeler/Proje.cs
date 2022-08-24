@@ -18,6 +18,7 @@ namespace Acme.SimpleTaskApp.Projeler
         public string ProjeAdi { get; set; }
         public string Description { get; set; }       
         public DurumEnum Durum { get; set; }
+        public string ProjeDurum { get; set; }
         public DateTime BaslamaTarihi { get; set; }
         public DateTime BitisTarihi { get; set; }
         public DateTime MusteriBitisTarihi { get; set; }

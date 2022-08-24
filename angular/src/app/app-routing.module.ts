@@ -22,6 +22,7 @@ import { GorevDuzenleComponent } from './gorev/gorev-duzenle/gorev-duzenle.compo
 
 import { ProjeDuzenleComponent } from './proje/proje-duzenle/proje-duzenle.component';
 import { YoneticiProjeAtaComponent } from './yonetici/yonetici-proje-ata/yonetici-proje-ata.component';
+import { DurumComponent } from './durum/durum.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { YoneticiProjeAtaComponent } from './yonetici/yonetici-proje-ata/yonetic
                     { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent, canActivate: [AppRouteGuard] },
                     { path: 'developeralan', component: DeveloperAlanComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
+                    { path: 'durum', component: DurumComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'proje', component: ProjeComponent, data: { permission: 'Pages.Proje' }, canActivate: [AppRouteGuard] },
                     { path: 'gorev', component: GorevComponent, data: { permission: 'Pages.Gorev' }, canActivate: [AppRouteGuard] },

@@ -20,14 +20,14 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
         private readonly IRepository<Proje> _repository;
         private readonly IRepository<Musteri> _musteriRepository;
         private readonly IRepository<Developer> _developerRepository;
-        private readonly IRepository<ProjeDurum> _projedurumrepo;
+        private readonly IRepository<ProjeDurum> _projeDurumRepo;
         public ProjeAppService(IRepository<Proje> repository,IRepository<Musteri> musteri,IRepository<Developer> developerRepository,IRepository<ProjeDurum> projedurum
             )
         {
             _repository = repository;
             _musteriRepository = musteri;
             _developerRepository = developerRepository;
-            _projedurumrepo = projedurum;
+            _projeDurumRepo = projedurum;
         }
 
 
@@ -49,9 +49,10 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
                 ProjeAdi = e.ProjeAdi,
                 Description = e.Description,
                 BaslamaTarihi = e.BaslamaTarihi,
-                Durum = e.Durum,
+                //Durum = e.Durum,
+                ProjeDurum = e.ProjeDurum,
                 BitisTarihi = e.BitisTarihi,
-                MusteriAdi = e.Musteri.MusteriAdi,
+                //MusteriAdi = e.Musteri.MusteriAdi,
             }).ToList();
 
         }
@@ -182,7 +183,7 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
             entity.ProjeAdi = input.ProjeAdi;
             entity.Description = input.Description;
             //entity.BitisTarihi = input.BitisTarihi;
-            entity.Durum = input.Durum;
+            entity.ProjeDurum = input.ProjeDurum;
             //entity.MusteriBitisTarihi = input.MusteriBitisTarihi;
             //entity.ProjeYoneticisiId = input.ProjeYoneticisiId;
             //entity.Description = input.Description;
@@ -218,7 +219,7 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
 
         public async Task<List<ProjeDurumDto>> GetProjeDurumuList()
         {
-            var entity = await _projedurumrepo.GetAll().Skip(0).Take(10).ToListAsync();
+            var entity = await _projeDurumRepo.GetAll().Skip(0).Take(10).ToListAsync();
             return entity.Select(e => new ProjeDurumDto
             {
                 ProjeDurumId = e.Id,
@@ -232,12 +233,12 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
             {
                 ProjeDurumu = input.ProjeDurumu,
             };
-            await _projedurumrepo.InsertAsync(entity);
+            await _projeDurumRepo.InsertAsync(entity);
         }
 
         public async Task DeleteProjeDurum(int id)
         {
-            await _projedurumrepo.DeleteAsync(id);
+            await _projeDurumRepo.DeleteAsync(id);
         }
         public async Task DeleteProje(int id)
         {

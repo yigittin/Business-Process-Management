@@ -2,8 +2,9 @@ import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
-import { DeveloperDto, DurumEnum, GorevDto, GorevGuncelleDto, GorevServiceProxy, ProjeDto } from '@shared/service-proxies/service-proxies';
+import { DeveloperDto, DurumEnum, GorevDto, GorevDurumDto, GorevGuncelleDto, GorevServiceProxy, ProjeDto } from '@shared/service-proxies/service-proxies';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-gorev-duzenle',
@@ -17,7 +18,7 @@ export class GorevDuzenleComponent extends AppComponentBase implements OnInit {
   updateGorev:NgForm;
   gorevDetails=new GorevDto;
   gorevGuncelle:GorevGuncelleDto;
-  durum : DurumEnum;
+  listDurum : Observable<GorevDurumDto[]>
   
   constructor(
     injector : Injector,
@@ -32,6 +33,7 @@ export class GorevDuzenleComponent extends AppComponentBase implements OnInit {
     this.id=this.route.snapshot.params['id'];
     this.gorevGuncelle=new GorevGuncelleDto();
     this.BilgileriGetir();
+    this.listDurum = this._gorevServiceProxy.getGorevDurumuList();
   }
 
   BilgileriGetir(){
