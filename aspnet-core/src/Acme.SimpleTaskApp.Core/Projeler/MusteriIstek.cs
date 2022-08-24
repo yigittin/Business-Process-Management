@@ -20,5 +20,6 @@ namespace Acme.SimpleTaskApp.Projeler
         public DateTime BaslangicTarih { get; set; }
         public DateTime DegistirmeTarih { get; set; }
         public DateTime BitisTarih { get; set; }
+        public string Document { get; set; }
     }
 }

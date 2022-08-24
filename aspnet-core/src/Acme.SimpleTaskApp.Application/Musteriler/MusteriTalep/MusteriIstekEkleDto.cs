@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,6 @@ namespace Acme.SimpleTaskApp.Projeler.Musteriler.MusteriTalep
         public string MusteriTalep { get; set; }
         public string MusteriAciklama { get; set; }
         public DateTime BaslangicTarih { get; set; }
-        
-
+        public IFormFile Document { get; set; }        
     }
 }

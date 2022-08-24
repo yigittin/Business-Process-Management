@@ -8,7 +8,11 @@ namespace Acme.SimpleTaskApp.SiteOperations
 {
     public class SiteOperations
     {
-        public static string UserPhoto = "images/UserPhoto";
-      
+        public static string Images = "images/";
+        public static string Documents="Documents/";
+        public static string UserPhoto = Images+"UserPhoto";
+        public static string MusteriTalep = Documents + "MusteriTalep";
+        public static string Projects = Documents + "Projects";
+
     }
 }
