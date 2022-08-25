@@ -22,6 +22,7 @@ import { GorevDuzenleComponent } from './gorev/gorev-duzenle/gorev-duzenle.compo
 
 import { ProjeDuzenleComponent } from './proje/proje-duzenle/proje-duzenle.component';
 import { YoneticiProjeAtaComponent } from './yonetici/yonetici-proje-ata/yonetici-proje-ata.component';
+import { DurumComponent } from './durum/durum.component';
 import { YoneticiDashboardComponent } from './yonetici-dashboard/yonetici-dashboard.component';
 
 
@@ -35,6 +36,7 @@ import { YoneticiDashboardComponent } from './yonetici-dashboard/yonetici-dashbo
                     { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent, canActivate: [AppRouteGuard] },
                     { path: 'developeralan', component: DeveloperAlanComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
+                    { path: 'durum', component: DurumComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'proje', component: ProjeComponent, data: { permission: 'Pages.Proje' }, canActivate: [AppRouteGuard] },
                     { path: 'yonetici-dashboard', component: YoneticiDashboardComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },

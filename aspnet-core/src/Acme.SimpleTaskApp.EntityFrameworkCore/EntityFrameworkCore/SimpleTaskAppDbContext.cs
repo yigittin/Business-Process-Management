@@ -24,6 +24,8 @@ namespace Acme.SimpleTaskApp.EntityFrameworkCore
         public DbSet<MusteriIstek> MusteriIstek { get; set; }
         public DbSet<ProjeYonetici> ProjeYoneticisi { get; set; }
         public DbSet<DeveloperAlan> DeveloperAlani { get; set; }    
+        public DbSet<ProjeDurum> ProjeDurum { get; set; }    
+        public DbSet<GorevDurum> GorevDurum { get; set; }
 
         //public DbSet<ProjeUser> ProjeUser { get;  set; }
 

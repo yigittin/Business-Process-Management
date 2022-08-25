@@ -15,6 +15,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler.GorevlerDtos
 
         public string GorevTanimi { get; set; }
         public DurumEnum Durum { get; set; }
+        public string GorevDurum { get; set; }
         public string GorevAciklama { get; set; }
         public int? DeveloperId { get; set; }
         public string DeveloperName { get; set; }

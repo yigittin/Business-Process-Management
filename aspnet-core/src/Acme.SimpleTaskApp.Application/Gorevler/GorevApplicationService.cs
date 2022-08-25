@@ -2,6 +2,7 @@
 using Abp.Domain.Repositories;
 using Abp.UI;
 using Acme.SimpleTaskApp.Authorization;
+using Acme.SimpleTaskApp.Gorevler.GorevlerDtos;
 using Acme.SimpleTaskApp.Projeler.Gorevler.GorevlerDtos;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,11 +18,13 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
     {
         private readonly IRepository<Gorev> _repository;
         private readonly IRepository<Proje> _proje;
-      
-        public GorevAppService(IRepository<Gorev> repository, IRepository<Proje> proje)
+        private readonly IRepository<GorevDurum> _gorevdurum;
+
+        public GorevAppService(IRepository<Gorev> repository, IRepository<Proje> proje, IRepository<GorevDurum> gorevdurum)
         {
             _repository = repository;
             _proje = proje;
+            _gorevdurum = gorevdurum;
         }
 
 
@@ -39,7 +42,8 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 DeveloperId = e.DeveloperId,
                 DeveloperNot=e.DeveloperNot,
-                DeveloperName=e.Developer.DeveloperName,
+                GorevDurum = e.GorevDurum,
+               // DeveloperName=e.Developer.DeveloperName,
             }).ToList();
         }
 
@@ -60,7 +64,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
             gorev.ProjeAdi = entity.Proje.ProjeAdi;
             gorev.BaslamaZamani = entity.BaslamaZamani;
             gorev.Durum = entity.Durum;
-            gorev.DeveloperName = entity.Developer.DeveloperName;
+           // gorev.DeveloperName = entity.Developer.DeveloperName;
             
             gorev.DeveloperNot = entity.DeveloperNot; 
             if (entity.DeveloperId == 0 || entity.DeveloperId == null)
@@ -69,7 +73,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
             }
             else
             {
-                gorev.DeveloperName = entity.Developer.DeveloperName;
+                //gorev.DeveloperName = entity.Developer.DeveloperName;
             }
             
             return gorev;        
@@ -96,7 +100,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 BitirmeZamani = e.BitirmeZamani,
                 DeveloperId = e.DeveloperId,
-                DeveloperName = e.Developer.DeveloperName,
+               // DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot=e.DeveloperNot,
             }).ToList();
 
@@ -115,7 +119,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 BitirmeZamani = e.BitirmeZamani,
                 DeveloperId = e.DeveloperId,
-                DeveloperName = e.Developer.DeveloperName,
+                //DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot = e.DeveloperNot,
             }).ToList();
         }
@@ -134,7 +138,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 BitirmeZamani = e.BitirmeZamani,
                 DeveloperId = e.DeveloperId,
-                DeveloperName = e.Developer.DeveloperName,
+            //    DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot = e.DeveloperNot,
             }).ToList();
 
@@ -154,7 +158,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 BaslamaZamani = e.BaslamaZamani,
                 BitirmeZamani = e.BitirmeZamani,
                 DeveloperId = e.DeveloperId,
-                DeveloperName = e.Developer.DeveloperName,
+                //DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot = e.DeveloperNot,
             }).ToList();
         }
@@ -190,7 +194,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 throw new UserFriendlyException("Gorev bulunamadı");
             }
 
-            entity.Durum = input.Durum;
+            entity.GorevDurum = input.GorevDurum;
 
             if (input.Durum == DurumEnum.Tamamlandi)
             {
@@ -229,7 +233,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
 
             entity.GorevTanimi = input.GorevTanimi;
             entity.GorevAciklama = input.GorevAciklama;
-            entity.Durum = input.Durum;
+            entity.GorevDurum = input.GorevDurum;
 
         }
 
@@ -245,6 +249,29 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
             input.DeveloperId = entity.Id;
             await _repository.UpdateAsync(entity);
 
+        }
+
+        public async Task<List<GorevDurumDto>> GetGorevDurumuList()
+        {
+            var entity = await _gorevdurum.GetAll().Skip(0).Take(10).ToListAsync();
+            return entity.Select(e => new GorevDurumDto
+            {
+                GorevDurumId = e.Id,
+                GorevDurumu = e.GorevDurumu,
+            }
+            ).ToList();
+        }
+        public async Task GorevDurumuEkle(GorevDurumDto input)
+        {
+            var entity = new GorevDurum
+            {
+                GorevDurumu = input.GorevDurumu,
+            };
+            await _gorevdurum.InsertAsync(entity);
+        }
+        public async Task DeleteGorevDurum(int id)
+        {
+            await _gorevdurum.DeleteAsync(id);
         }
 
         public async Task DeleteGorev(int id)

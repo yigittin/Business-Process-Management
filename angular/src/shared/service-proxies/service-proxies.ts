@@ -1956,6 +1956,168 @@ export class GorevServiceProxy {
     }
 
     /**
+     * @return Success
+     */
+    getGorevDurumuList(): Observable<GorevDurumDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/Gorev/GetGorevDurumuList";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetGorevDurumuList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetGorevDurumuList(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GorevDurumDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GorevDurumDto[]>;
+        }));
+    }
+
+    protected processGetGorevDurumuList(response: HttpResponseBase): Observable<GorevDurumDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(GorevDurumDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GorevDurumDto[]>(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    gorevDurumuEkle(body: GorevDurumDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Gorev/GorevDurumuEkle";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGorevDurumuEkle(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGorevDurumuEkle(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processGorevDurumuEkle(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    deleteGorevDurum(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Gorev/DeleteGorevDurum?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteGorevDurum(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteGorevDurum(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDeleteGorevDurum(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+
+    /**
      * @param id (optional) 
      * @return Success
      */
@@ -3251,6 +3413,168 @@ export class ProjeServiceProxy {
     }
 
     protected processProjeBırak(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getProjeDurumuList(): Observable<ProjeDurumDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/Proje/GetProjeDurumuList";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetProjeDurumuList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetProjeDurumuList(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ProjeDurumDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ProjeDurumDto[]>;
+        }));
+    }
+
+    protected processGetProjeDurumuList(response: HttpResponseBase): Observable<ProjeDurumDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(ProjeDurumDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ProjeDurumDto[]>(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    projeDurumuEkle(body: ProjeDurumDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Proje/ProjeDurumuEkle";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processProjeDurumuEkle(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processProjeDurumuEkle(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processProjeDurumuEkle(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    deleteProjeDurum(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Proje/DeleteProjeDurum?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteProjeDurum(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteProjeDurum(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDeleteProjeDurum(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -6881,6 +7205,7 @@ export class GorevDto implements IGorevDto {
     gorevId: number;
     gorevTanimi: string | undefined;
     durum: DurumEnum;
+    gorevDurum: string | undefined;
     gorevAciklama: string | undefined;
     developerId: number | undefined;
     developerName: string | undefined;
@@ -6904,6 +7229,7 @@ export class GorevDto implements IGorevDto {
             this.gorevId = _data["gorevId"];
             this.gorevTanimi = _data["gorevTanimi"];
             this.durum = _data["durum"];
+            this.gorevDurum = _data["gorevDurum"];
             this.gorevAciklama = _data["gorevAciklama"];
             this.developerId = _data["developerId"];
             this.developerName = _data["developerName"];
@@ -6927,6 +7253,7 @@ export class GorevDto implements IGorevDto {
         data["gorevId"] = this.gorevId;
         data["gorevTanimi"] = this.gorevTanimi;
         data["durum"] = this.durum;
+        data["gorevDurum"] = this.gorevDurum;
         data["gorevAciklama"] = this.gorevAciklama;
         data["developerId"] = this.developerId;
         data["developerName"] = this.developerName;
@@ -6950,6 +7277,7 @@ export interface IGorevDto {
     gorevId: number;
     gorevTanimi: string | undefined;
     durum: DurumEnum;
+    gorevDurum: string | undefined;
     gorevAciklama: string | undefined;
     developerId: number | undefined;
     developerName: string | undefined;
@@ -6958,6 +7286,53 @@ export interface IGorevDto {
     baslamaZamani: moment.Moment;
     bitirmeZamani: moment.Moment;
     developerNot: string | undefined;
+}
+
+export class GorevDurumDto implements IGorevDurumDto {
+    gorevDurumId: number;
+    gorevDurumu: string | undefined;
+
+    constructor(data?: IGorevDurumDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.gorevDurumId = _data["gorevDurumId"];
+            this.gorevDurumu = _data["gorevDurumu"];
+        }
+    }
+
+    static fromJS(data: any): GorevDurumDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GorevDurumDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["gorevDurumId"] = this.gorevDurumId;
+        data["gorevDurumu"] = this.gorevDurumu;
+        return data;
+    }
+
+    clone(): GorevDurumDto {
+        const json = this.toJSON();
+        let result = new GorevDurumDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGorevDurumDto {
+    gorevDurumId: number;
+    gorevDurumu: string | undefined;
 }
 
 export class GorevEkleDto implements IGorevEkleDto {
@@ -7030,6 +7405,7 @@ export class GorevGuncelleDto implements IGorevGuncelleDto {
     developerId: number;
     projeId: number;
     durum: DurumEnum;
+    gorevDurum: string | undefined;
     baslamaZamani: moment.Moment;
 
     constructor(data?: IGorevGuncelleDto) {
@@ -7049,6 +7425,7 @@ export class GorevGuncelleDto implements IGorevGuncelleDto {
             this.developerId = _data["developerId"];
             this.projeId = _data["projeId"];
             this.durum = _data["durum"];
+            this.gorevDurum = _data["gorevDurum"];
             this.baslamaZamani = _data["baslamaZamani"] ? moment(_data["baslamaZamani"].toString()) : <any>undefined;
         }
     }
@@ -7068,6 +7445,7 @@ export class GorevGuncelleDto implements IGorevGuncelleDto {
         data["developerId"] = this.developerId;
         data["projeId"] = this.projeId;
         data["durum"] = this.durum;
+        data["gorevDurum"] = this.gorevDurum;
         data["baslamaZamani"] = this.baslamaZamani ? this.baslamaZamani.toISOString() : <any>undefined;
         return data;
     }
@@ -7087,6 +7465,7 @@ export interface IGorevGuncelleDto {
     developerId: number;
     projeId: number;
     durum: DurumEnum;
+    gorevDurum: string | undefined;
     baslamaZamani: moment.Moment;
 }
 
@@ -7691,6 +8070,7 @@ export class MusteriIstekEkleDto implements IMusteriIstekEkleDto {
     musteriTalep: string | undefined;
     musteriAciklama: string | undefined;
     baslangicTarih: moment.Moment;
+    document: string | undefined;
 
     constructor(data?: IMusteriIstekEkleDto) {
         if (data) {
@@ -7709,6 +8089,7 @@ export class MusteriIstekEkleDto implements IMusteriIstekEkleDto {
             this.musteriTalep = _data["musteriTalep"];
             this.musteriAciklama = _data["musteriAciklama"];
             this.baslangicTarih = _data["baslangicTarih"] ? moment(_data["baslangicTarih"].toString()) : <any>undefined;
+            this.document = _data["document"];
         }
     }
 
@@ -7727,6 +8108,7 @@ export class MusteriIstekEkleDto implements IMusteriIstekEkleDto {
         data["musteriTalep"] = this.musteriTalep;
         data["musteriAciklama"] = this.musteriAciklama;
         data["baslangicTarih"] = this.baslangicTarih ? this.baslangicTarih.toISOString() : <any>undefined;
+        data["document"] = this.document;
         return data;
     }
 
@@ -7745,6 +8127,7 @@ export interface IMusteriIstekEkleDto {
     musteriTalep: string | undefined;
     musteriAciklama: string | undefined;
     baslangicTarih: moment.Moment;
+    document: string | undefined;
 }
 
 export class PermissionDto implements IPermissionDto {
@@ -7865,6 +8248,7 @@ export class Proje implements IProje {
     projeAdi: string | undefined;
     description: string | undefined;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     baslamaTarihi: moment.Moment;
     bitisTarihi: moment.Moment;
     musteriBitisTarihi: moment.Moment;
@@ -7896,6 +8280,7 @@ export class Proje implements IProje {
             this.projeAdi = _data["projeAdi"];
             this.description = _data["description"];
             this.durum = _data["durum"];
+            this.projeDurum = _data["projeDurum"];
             this.baslamaTarihi = _data["baslamaTarihi"] ? moment(_data["baslamaTarihi"].toString()) : <any>undefined;
             this.bitisTarihi = _data["bitisTarihi"] ? moment(_data["bitisTarihi"].toString()) : <any>undefined;
             this.musteriBitisTarihi = _data["musteriBitisTarihi"] ? moment(_data["musteriBitisTarihi"].toString()) : <any>undefined;
@@ -7927,6 +8312,7 @@ export class Proje implements IProje {
         data["projeAdi"] = this.projeAdi;
         data["description"] = this.description;
         data["durum"] = this.durum;
+        data["projeDurum"] = this.projeDurum;
         data["baslamaTarihi"] = this.baslamaTarihi ? this.baslamaTarihi.toISOString() : <any>undefined;
         data["bitisTarihi"] = this.bitisTarihi ? this.bitisTarihi.toISOString() : <any>undefined;
         data["musteriBitisTarihi"] = this.musteriBitisTarihi ? this.musteriBitisTarihi.toISOString() : <any>undefined;
@@ -7958,6 +8344,7 @@ export interface IProje {
     projeAdi: string | undefined;
     description: string | undefined;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     baslamaTarihi: moment.Moment;
     bitisTarihi: moment.Moment;
     musteriBitisTarihi: moment.Moment;
@@ -7978,6 +8365,7 @@ export class ProjeDto implements IProjeDto {
     musteriAdi: string | undefined;
     developers: Developer[] | undefined;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     isDone: boolean;
 
     constructor(data?: IProjeDto) {
@@ -8008,6 +8396,7 @@ export class ProjeDto implements IProjeDto {
                     this.developers.push(Developer.fromJS(item));
             }
             this.durum = _data["durum"];
+            this.projeDurum = _data["projeDurum"];
             this.isDone = _data["isDone"];
         }
     }
@@ -8038,6 +8427,7 @@ export class ProjeDto implements IProjeDto {
                 data["developers"].push(item.toJSON());
         }
         data["durum"] = this.durum;
+        data["projeDurum"] = this.projeDurum;
         data["isDone"] = this.isDone;
         return data;
     }
@@ -8060,7 +8450,55 @@ export interface IProjeDto {
     musteriAdi: string | undefined;
     developers: Developer[] | undefined;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     isDone: boolean;
+}
+
+export class ProjeDurumDto implements IProjeDurumDto {
+    projeDurumId: number;
+    projeDurumu: string | undefined;
+
+    constructor(data?: IProjeDurumDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.projeDurumId = _data["projeDurumId"];
+            this.projeDurumu = _data["projeDurumu"];
+        }
+    }
+
+    static fromJS(data: any): ProjeDurumDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProjeDurumDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["projeDurumId"] = this.projeDurumId;
+        data["projeDurumu"] = this.projeDurumu;
+        return data;
+    }
+
+    clone(): ProjeDurumDto {
+        const json = this.toJSON();
+        let result = new ProjeDurumDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IProjeDurumDto {
+    projeDurumId: number;
+    projeDurumu: string | undefined;
 }
 
 export class ProjeEkleDto implements IProjeEkleDto {
@@ -8128,6 +8566,7 @@ export class ProjeGuncelleDto implements IProjeGuncelleDto {
     musteriBitisTarihi: moment.Moment;
     musteriBaslamaTarihi: moment.Moment;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     projeYoneticisi: ProjeYonetici;
     projeYoneticisiId: number;
     isDone: boolean;
@@ -8152,6 +8591,7 @@ export class ProjeGuncelleDto implements IProjeGuncelleDto {
             this.musteriBitisTarihi = _data["musteriBitisTarihi"] ? moment(_data["musteriBitisTarihi"].toString()) : <any>undefined;
             this.musteriBaslamaTarihi = _data["musteriBaslamaTarihi"] ? moment(_data["musteriBaslamaTarihi"].toString()) : <any>undefined;
             this.durum = _data["durum"];
+            this.projeDurum = _data["projeDurum"];
             this.projeYoneticisi = _data["projeYoneticisi"] ? ProjeYonetici.fromJS(_data["projeYoneticisi"]) : <any>undefined;
             this.projeYoneticisiId = _data["projeYoneticisiId"];
             this.isDone = _data["isDone"];
@@ -8176,6 +8616,7 @@ export class ProjeGuncelleDto implements IProjeGuncelleDto {
         data["musteriBitisTarihi"] = this.musteriBitisTarihi ? this.musteriBitisTarihi.toISOString() : <any>undefined;
         data["musteriBaslamaTarihi"] = this.musteriBaslamaTarihi ? this.musteriBaslamaTarihi.toISOString() : <any>undefined;
         data["durum"] = this.durum;
+        data["projeDurum"] = this.projeDurum;
         data["projeYoneticisi"] = this.projeYoneticisi ? this.projeYoneticisi.toJSON() : <any>undefined;
         data["projeYoneticisiId"] = this.projeYoneticisiId;
         data["isDone"] = this.isDone;
@@ -8200,6 +8641,7 @@ export interface IProjeGuncelleDto {
     musteriBitisTarihi: moment.Moment;
     musteriBaslamaTarihi: moment.Moment;
     durum: DurumEnum;
+    projeDurum: string | undefined;
     projeYoneticisi: ProjeYonetici;
     projeYoneticisiId: number;
     isDone: boolean;

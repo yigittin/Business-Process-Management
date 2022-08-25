@@ -4,6 +4,7 @@ using Acme.SimpleTaskApp.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acme.SimpleTaskApp.Migrations
 {
     [DbContext(typeof(SimpleTaskAppDbContext))]
-    partial class SimpleTaskAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220819091222_durum")]
+    partial class durum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1764,9 +1766,6 @@ namespace Acme.SimpleTaskApp.Migrations
                     b.Property<string>("GorevAciklama")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GorevDurum")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("GorevTanimi")
                         .HasColumnType("nvarchar(max)");
 
@@ -1908,9 +1907,6 @@ namespace Acme.SimpleTaskApp.Migrations
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Document")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -1973,9 +1969,6 @@ namespace Acme.SimpleTaskApp.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDone")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2");
 
@@ -1989,9 +1982,6 @@ namespace Acme.SimpleTaskApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ProjeAdi")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProjeDurum")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ProjeYoneticisiId")

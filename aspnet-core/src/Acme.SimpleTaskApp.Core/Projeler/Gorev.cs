@@ -23,7 +23,8 @@ namespace Acme.SimpleTaskApp.Projeler
         public int? DeveloperId { get; set; }        
         public string GorevTanimi { get; set; }
         public string GorevAciklama { get; set; }
-        public DurumEnum Durum { get; set; }        
+        public DurumEnum Durum { get; set; }
+        public string GorevDurum { get; set; }
         public DateTime BaslamaZamani { get; set; }
         public DateTime BitirmeZamani { get; set; }
         public string DeveloperNot { get; set; }

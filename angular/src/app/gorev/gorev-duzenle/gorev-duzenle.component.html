@@ -27,8 +27,14 @@
                         {{ "Durum" | localize }}
                     </label>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" name="durum" id="durum" maxlength="32"
-                            value="{{gorevDetails.durum}}" readonly>
+                        <ng-select 
+                        [items]="listDurum |async"
+                        [ngModelOptions]="{standalone: true}" 
+                        bindLabel="gorevDurumu" 
+                        autofocus
+                        bindValue="gorevDurumu"  
+                        [(ngModel)]="gorevGuncelle.gorevDurum"
+                        #userIdModel="ngModel"></ng-select>
                     </div>
                 </div>
                 <div class="form-group row">

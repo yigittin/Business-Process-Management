@@ -39,6 +39,7 @@
                 <th>{{ "Proje ID" | localize }}</th>
                 <th>{{ "Proje Adı" | localize }}</th>
                 <th>{{ "Açıklama" | localize }}</th>
+                <th>{{ "Proje Durumu" | localize }}</th>
                 <th style="width: 200px;">{{ "Actions" | localize }}</th>
               </tr>
             </thead>
@@ -47,6 +48,7 @@
                 <td>{{proje.projeId}}</td>
                 <td>{{proje.projeAdi}}</td>
                 <td>{{proje.description}}</td>
+                <td>{{proje.projeDurum}}</td>
                 <td>
                   <a [routerLink]="['proje-duzenle/'+proje.projeId]" type="button" class="btn btn-sm bg-secondary">
                     <i class="fas fa-pencil-alt"></i>

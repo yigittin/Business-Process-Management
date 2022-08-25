@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Acme.SimpleTaskApp.Gorevler.GorevlerDtos
 {
-    public class DurumDto
+    public class GorevDurumDto
     {
-        public int Id { get; set; } 
-        public string Name { get; set; }
+        public int GorevDurumId { get; set; }
+        public string GorevDurumu { get; set; }
     }
 }
