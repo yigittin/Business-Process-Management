@@ -206,9 +206,9 @@ namespace Acme.SimpleTaskApp.Projeler.Developers
                 DeveloperSide = e.DeveloperSide,
                 DeveloperCommits = e.DeveloperCommits,
                 ProjeId=e.ProjeId,
-                ProjeAdi=e.Proje.ProjeAdi,
+                //ProjeAdi=e.Proje.ProjeAdi,
                 YoneticiId = e.YoneticiId,
-                YoneticiAdi=e.Yonetici.ProjeYoneticisiAdi,
+                //YoneticiAdi=e.Yonetici.ProjeYoneticisiAdi,
             }).ToList();
         }
 

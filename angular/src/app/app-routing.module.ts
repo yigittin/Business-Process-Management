@@ -39,7 +39,7 @@ import { YoneticiDashboardComponent } from './yonetici-dashboard/yonetici-dashbo
                     { path: 'durum', component: DurumComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'proje', component: ProjeComponent, data: { permission: 'Pages.Proje' }, canActivate: [AppRouteGuard] },
-                    { path: 'yonetici-dashboard', component: YoneticiDashboardComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
+                    { path: 'yonetici-dashboard', component: YoneticiDashboardComponent, data: { permission: 'Pages.Deneme' }, canActivate: [AppRouteGuard] },
                     { path: 'gorev', component: GorevComponent, data: { permission: 'Pages.Gorev' }, canActivate: [AppRouteGuard] },
                     { path: 'developer', component: DeveloperComponent, data: { permission: 'Pages.Developer' }, canActivate: [AppRouteGuard] },
                     { path: 'musteri', component: MusteriComponent, data: { permission: 'Pages.Musteri' }, canActivate: [AppRouteGuard] },

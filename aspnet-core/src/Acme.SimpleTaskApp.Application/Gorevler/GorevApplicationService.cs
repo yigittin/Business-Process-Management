@@ -63,7 +63,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
             gorev.ProjeId = entity.ProjeId;
             gorev.ProjeAdi = entity.Proje.ProjeAdi;
             gorev.BaslamaZamani = entity.BaslamaZamani;
-            gorev.Durum = entity.Durum;
+            gorev.GorevDurum = entity.GorevDurum;
            // gorev.DeveloperName = entity.Developer.DeveloperName;
             
             gorev.DeveloperNot = entity.DeveloperNot; 
@@ -102,6 +102,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 DeveloperId = e.DeveloperId,
                // DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot=e.DeveloperNot,
+                GorevDurum = e.GorevDurum,
             }).ToList();
 
           
@@ -121,6 +122,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 DeveloperId = e.DeveloperId,
                 //DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot = e.DeveloperNot,
+                GorevDurum = e.GorevDurum,
             }).ToList();
         }
 
@@ -140,6 +142,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 DeveloperId = e.DeveloperId,
             //    DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot = e.DeveloperNot,
+                GorevDurum = e.GorevDurum,
             }).ToList();
 
         }
@@ -160,6 +163,7 @@ namespace Acme.SimpleTaskApp.Projeler.Gorevler
                 DeveloperId = e.DeveloperId,
                 //DeveloperName = e.Developer.DeveloperName,
                 DeveloperNot = e.DeveloperNot,
+                GorevDurum = e.GorevDurum,
             }).ToList();
         }
 
