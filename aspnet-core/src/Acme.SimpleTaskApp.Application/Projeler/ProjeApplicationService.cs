@@ -83,7 +83,8 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
                 BitisTarihi = e.BitisTarihi,
                 Developers = developerList,
                 Description=e.Description,
-                Durum=e.Durum,
+
+                ProjeDurum = e.ProjeDurum,
 
             }).ToList();
         }
@@ -97,7 +98,9 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
             {
                 ProjeId = e.Id,
                 ProjeAdi = e.ProjeAdi,
-                BaslamaTarihi = e.BaslamaTarihi,                
+                BaslamaTarihi = e.BaslamaTarihi,
+
+                ProjeDurum = e.ProjeDurum,
 
             }).ToList();
         }        
@@ -113,7 +116,7 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
                 Description = entity.Description,
                 BaslamaTarihi = entity.BaslamaTarihi,
                 BitisTarihi = entity.BitisTarihi,
-                Durum = entity.Durum,
+                ProjeDurum = entity.ProjeDurum,
                 MusteriAdi = entity.Musteri.MusteriAdi,
             };
         }
@@ -127,7 +130,7 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
                 ProjeAdi = e.ProjeAdi,
                 Description = e.Description,
                 BaslamaTarihi = e.BaslamaTarihi,
-                Durum = e.Durum,
+                ProjeDurum = e.ProjeDurum,
                 BitisTarihi = e.BitisTarihi,
                // MusteriAdi = e.Musteri.MusteriAdi,
             }).ToList();
@@ -163,11 +166,11 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler
             {
                 throw new UserFriendlyException("Geçersiz Proje Id");
             }
-            if (string.IsNullOrEmpty(input.ProjeAdi))
+            if (string.IsNullOrEmpty(entity.ProjeAdi))
             {
                 throw new UserFriendlyException("Proje Adı Boş Olamaz");
             }
-            if (input.MusteriId == 0)
+            if (entity.MusteriId == 0)
             {
                 throw new UserFriendlyException("Geçersiz Müşteri Id");
             }

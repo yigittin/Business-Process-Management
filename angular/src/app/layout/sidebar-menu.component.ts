@@ -119,7 +119,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 this.l('Yonetici Dashboard'),
                 '/app/yonetici-dashboard',
                 'fas fa-users',
-                'Pages.Users'
+                'Pages.Deneme'
             ),
         ];
     }
