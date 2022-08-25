@@ -13,7 +13,7 @@
     <div >
         <tabset>
             
-            <tab [heading]="'Proje Yöneticisi' | localize" class="pt-3 px-2">
+            <tab [heading]="'Proje Yöneticisi' | localize" class="pt-3 px-2" id="tab1">
                 <div class="container mx-auto" >
                     <h1>Profil sayfası</h1>
                     <div class="form-group row justify-content-center required " >
@@ -92,7 +92,7 @@
                 </div>
             </tab>
             <!-- Projelerim tabı -->
-                <tab [heading]="'Projelerim' | localize" class="pt-3 px-2">
+                <tab [heading]="'Projelerim' | localize" class="pt-3 px-2" id="tab2">
                     <section class="content-header">
                         <div class="container-fluid">
                           <div class="row">
@@ -184,7 +184,7 @@
                       </div>
             </tab>    
                     <!-- Developerlarım Tabı -->
-             <tab [heading]="'Developerlarım' | localize" class="pt-3 px-2">
+             <tab [heading]="'Developerlarım' | localize" class="pt-3 px-2" id="tab3">
               <section class="content-header">
                   <div class="container-fluid">
                     <div class="row">
@@ -274,8 +274,9 @@
                     </div>
                   </div>
                 </div>
-      </tab>
-      <tab [heading]="'Gorevler' | localize" class="pt-3 px-2">
+            </tab>
+
+            <tab [heading]="'Gorevler' | localize" class="pt-3 px-2" id="tab4">
         <section class="content-header">
           <div class="container-fluid">
             <div class="row">
@@ -361,7 +362,7 @@
             </div>
           </div>
         </section>      
-        </tab>
+          </tab>
         </tabset>
         <!-- <abp-modal-footer
         [cancelDisabled]="saving"

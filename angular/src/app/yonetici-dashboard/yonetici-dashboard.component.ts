@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
 import { DeveloperDto, DevelopersServiceProxy, GorevDto, MusteriIstekDto, ProjeDto, YoneticiDashboardServiceProxy, YoneticiDashDto, YoneticiDto, YoneticiGuncelleDto, YoneticiServiceProxy } from '@shared/service-proxies/service-proxies';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { windowTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-yonetici-dashboard',
@@ -23,8 +25,10 @@ export class YoneticiDashboardComponent extends AppComponentBase implements OnIn
   countTask : number;
   countMusteriIstek: number;
   Id :number;
+  tabid:any;
   constructor(
     injector:Injector,
+    private router: Router,
     private _yoneticiServiceProxy:YoneticiServiceProxy,
     private _dashboardServiceProxy:YoneticiDashboardServiceProxy,
     private _developerServiceProxy:DevelopersServiceProxy,
@@ -92,6 +96,20 @@ export class YoneticiDashboardComponent extends AppComponentBase implements OnIn
 
   // sayfa yönlendirme metotları
   goMyProfile(){
-    console.log("Profile Gidildi!");
+    // this.tabid=document.getElementById('tab1');
+    // window.location.href = ('app/yonetici/yonetici-duzenle/'+this.Id+"#tab1");
+    this.router.navigateByUrl('app/yonetici/yonetici-duzenle/'+this.Id);
+  }
+  goMyProject(){
+    this.router.navigateByUrl('app/yonetici/yonetici-duzenle/'+this.Id);
+  }
+  goMyDeveloper(){
+    this.router.navigateByUrl('app/yonetici/yonetici-duzenle/'+this.Id);
+  }
+  goMyTasks(){
+    this.router.navigateByUrl('app/yonetici/yonetici-duzenle/'+this.Id);
+  }
+  goMyCustomerTasks(){
+    this.router.navigateByUrl('app/yonetici/yonetici-duzenle/'+this.Id);
   }
 }

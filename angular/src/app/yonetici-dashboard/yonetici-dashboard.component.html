@@ -174,7 +174,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title" style="font-size: 30px">Proje Listesi</h3>
-                <a href="javascript:;" style="float:right;" class="btn bg-blue" (click)="goMyProfile()">
+                <a href="javascript:;" style="float:right;" class="btn bg-blue" (click)="goMyProject()">
                   <i class="fa fa-folder-open"></i>
                   {{ "Porjeler" | localize }}
                 </a>
@@ -217,7 +217,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title" style="font-size: 30px">Geliştiriciler</h3>
-              <a href="javascript:;" style="float:right;" class="btn bg-blue" (click)="goMyProfile()">
+              <a href="javascript:;" style="float:right;" class="btn bg-blue" (click)="goMyDeveloper()">
                 <i class="fa fa-users"></i>
                 {{ "Geliştiriciler" | localize }}
               </a>
@@ -258,7 +258,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title" style="font-size: 30px">Görevler</h3>
-              <a href="javascript:;" style="float:right;" class="btn bg-blue" (click)="goMyProfile()">
+              <a href="javascript:;" style="float:right;" class="btn bg-blue" (click)="goMyTasks()">
                 <i class="fa fa-tasks"></i>
                 {{ "Görevler" | localize }}
               </a>
@@ -304,7 +304,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title" style="font-size: 30px">Müşteri Talepleri</h3>
-              <a href="javascript:;" style="float:right;" class="btn bg-blue" (click)="goMyProfile()" [routerLink]="['../yonetici/yonetici-duzenle/'+Id] " >
+              <a href="javascript:;" style="float:right;" class="btn bg-blue" (click)="goMyCustomerTasks()">
                 <i class="fa fa-servers"></i>
                 {{ "Müşteri Talepleri" | localize }}
               </a>
