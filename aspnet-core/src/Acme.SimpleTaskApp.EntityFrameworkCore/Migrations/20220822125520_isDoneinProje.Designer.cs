@@ -4,6 +4,7 @@ using Acme.SimpleTaskApp.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acme.SimpleTaskApp.Migrations
 {
     [DbContext(typeof(SimpleTaskAppDbContext))]
-    partial class SimpleTaskAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220822125520_isDoneinProje")]
+    partial class isDoneinProje
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1764,9 +1766,6 @@ namespace Acme.SimpleTaskApp.Migrations
                     b.Property<string>("GorevAciklama")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GorevDurum")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("GorevTanimi")
                         .HasColumnType("nvarchar(max)");
 
@@ -1789,43 +1788,6 @@ namespace Acme.SimpleTaskApp.Migrations
                     b.HasIndex("ProjeId");
 
                     b.ToTable("Gorevler");
-                });
-
-            modelBuilder.Entity("Acme.SimpleTaskApp.Projeler.GorevDurum", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("GorevDurumu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GorevDurum");
                 });
 
             modelBuilder.Entity("Acme.SimpleTaskApp.Projeler.Musteri", b =>
@@ -1908,9 +1870,6 @@ namespace Acme.SimpleTaskApp.Migrations
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Document")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -1991,9 +1950,6 @@ namespace Acme.SimpleTaskApp.Migrations
                     b.Property<string>("ProjeAdi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProjeDurum")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("ProjeYoneticisiId")
                         .HasColumnType("int");
 
@@ -2004,43 +1960,6 @@ namespace Acme.SimpleTaskApp.Migrations
                     b.HasIndex("ProjeYoneticisiId");
 
                     b.ToTable("Proje");
-                });
-
-            modelBuilder.Entity("Acme.SimpleTaskApp.Projeler.ProjeDurum", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("ProjeDurumu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProjeDurum");
                 });
 
             modelBuilder.Entity("Acme.SimpleTaskApp.Projeler.ProjeYonetici", b =>

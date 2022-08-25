@@ -21,6 +21,8 @@ namespace Acme.SimpleTaskApp.Projeler.Projeler.ProjelerDtos
         public DurumEnum Durum { get; set; }
         public string ProjeDurum { get; set; }
 
+        public bool IsDone { get; set; }
+
 
 
     }
