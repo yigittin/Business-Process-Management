@@ -6,6 +6,5 @@ namespace Acme.SimpleTaskApp.Projeler.Customers
 {
     public interface IMusteriAppService : IApplicationService
     {
-        Task MusteriIstekEkle([FormData] MusteriIstekEkleDto input);
     }
 }

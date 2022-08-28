@@ -237,7 +237,7 @@ namespace Acme.SimpleTaskApp.Projeler.Customers
 
             await _repository.UpdateAsync(entity);
         }
-
+        [HttpPost]
         public async Task MusteriIstekEkle([FromForm]MusteriIstekEkleDto input)
         {
             var proje = await _projeRepository.GetAll().Where(q => q.Id == input.ProjeId).FirstOrDefaultAsync();
@@ -245,33 +245,49 @@ namespace Acme.SimpleTaskApp.Projeler.Customers
             {
                 throw new UserFriendlyException("Geçersiz Proje Id");
             }
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            var files = input.Document;
-            string fileName = Guid.NewGuid().ToString();
-            var uploads = Path.Combine(webRootPath, SiteOperations.SiteOperations.MusteriTalep);
-            var extension = Path.GetExtension(files.FileName);
-            if (extension != ".pdf")
+            if(input.Document is not null)
             {
-                throw new UserFriendlyException("Sadece PDF Yükleyiniz");
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                var files = input.Document;
+                string fileName = Guid.NewGuid().ToString();
+                var uploads = Path.Combine(webRootPath, SiteOperations.SiteOperations.MusteriTalep);
+                var extension = Path.GetExtension(files.FileName);
+                if (extension != ".pdf")
+                {
+                    throw new UserFriendlyException("Sadece PDF Yükleyiniz");
+                }
+
+                using(var fileStream =new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                {
+                    files.CopyTo(fileStream);
+                }
+                var entityDoc = new MusteriIstek
+                {
+                    MusteriId = input.MusteriId,
+                    ProjeId = input.ProjeId,
+                    Istek = input.MusteriTalep,
+                    Aciklama = input.MusteriAciklama,
+                    BaslangicTarih = DateTime.Now,
+                    Document = @"/" + fileName + extension,
+
+                };
+                await _istekRepository.InsertAsync(entityDoc);
             }
-
-            using(var fileStream =new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            else if(input.Document is null)
             {
-                files.CopyTo(fileStream);
-            }
+                var entity = new MusteriIstek
+                {
+                    MusteriId = input.MusteriId,
+                    ProjeId = input.ProjeId,
+                    Istek = input.MusteriTalep,
+                    Aciklama = input.MusteriAciklama,
+                    BaslangicTarih = DateTime.Now,                  
 
-            var entity = new MusteriIstek
-            {
-                MusteriId = input.MusteriId,
-                ProjeId = input.ProjeId,
-                Istek = input.MusteriTalep,
-                Aciklama = input.MusteriAciklama,
-                BaslangicTarih = DateTime.Now,
-                Document = @"/" + fileName + extension,
+                };
+                await _istekRepository.InsertAsync(entity);
+            }       
 
-            };
-
-            await _istekRepository.InsertAsync(entity);
+            
         }        
 
         public async Task MusteriIstekUpdate(int istekId,MusteriIstekDuzenleDto input)

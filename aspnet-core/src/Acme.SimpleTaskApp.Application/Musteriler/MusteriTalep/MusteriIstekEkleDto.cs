@@ -15,7 +15,6 @@ namespace Acme.SimpleTaskApp.Projeler.Musteriler.MusteriTalep
         public int MusteriId { get; set; }
         public string MusteriTalep { get; set; }
         public string MusteriAciklama { get; set; }
-        public DateTime BaslangicTarih { get; set; }
         public IFormFile Document { get; set; }        
     }
 }
