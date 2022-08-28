@@ -16,11 +16,15 @@ using Acme.SimpleTaskApp.Projeler.Musteriler.MusteriTalep;
 using Acme.SimpleTaskApp.Roles.Dto;
 using Acme.SimpleTaskApp.Users;
 using Acme.SimpleTaskApp.Users.Dto;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,15 +39,25 @@ namespace Acme.SimpleTaskApp.Projeler.Customers
         private readonly UserManager _userManager;
         private readonly IRepository<User, long> _userRepository;
         private readonly IRepository<Role> _roleRepository;
+        private readonly IRepository<Proje> _projeRepository;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
 
-        public MusteriAppService(IRepository<Musteri> repository, IRepository<MusteriIstek> istekRepository, UserManager userManager, IRepository<User, long> userRepository,IRepository<Role> roles)
+        public MusteriAppService(IRepository<Musteri> repository,
+            IRepository<MusteriIstek> istekRepository,
+            UserManager userManager,
+            IRepository<User, long> userRepository,
+            IRepository<Role> roles,
+            IRepository<Proje> projeRepository,
+            IWebHostEnvironment hostingEnvironment)
         {
             _repository = repository;
             _istekRepository = istekRepository;
             _userManager = userManager;
             _userRepository = userRepository;
             _roleRepository = roles;
+            _projeRepository = projeRepository;
+            _hostingEnvironment = hostingEnvironment;
         }
 
 
@@ -224,19 +238,36 @@ namespace Acme.SimpleTaskApp.Projeler.Customers
             await _repository.UpdateAsync(entity);
         }
 
-        public async Task MusteriIstekEkle(MusteriIstekEkleDto input)
+        public async Task MusteriIstekEkle([FromForm]MusteriIstekEkleDto input)
         {
-            if (input.ProjeId == 0)
+            var proje = await _projeRepository.GetAll().Where(q => q.Id == input.ProjeId).FirstOrDefaultAsync();
+            if (proje is null)
             {
                 throw new UserFriendlyException("Geçersiz Proje Id");
             }
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            var files = input.Document;
+            string fileName = Guid.NewGuid().ToString();
+            var uploads = Path.Combine(webRootPath, SiteOperations.SiteOperations.MusteriTalep);
+            var extension = Path.GetExtension(files.FileName);
+            if (extension != ".pdf")
+            {
+                throw new UserFriendlyException("Sadece PDF Yükleyiniz");
+            }
+
+            using(var fileStream =new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            {
+                files.CopyTo(fileStream);
+            }
+
             var entity = new MusteriIstek
             {
                 MusteriId = input.MusteriId,
-                ProjeId=input.ProjeId,
-                Istek=input.MusteriTalep,
-                Aciklama=input.MusteriAciklama,
+                ProjeId = input.ProjeId,
+                Istek = input.MusteriTalep,
+                Aciklama = input.MusteriAciklama,
                 BaslangicTarih = DateTime.Now,
+                Document = @"/" + fileName + extension,
 
             };
 
